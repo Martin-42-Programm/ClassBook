@@ -1,7 +1,18 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using ClassBook.Data;
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+string connectionString = builder
+                            .Configuration
+                            .GetConnectionString("ApplicationContextConnectionString") ??
+        throw new InvalidDataException("No valid connection string!");
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ApplicationContext>(options =>
+    options.UseMySQL(connectionString));
 
 var app = builder.Build();
 

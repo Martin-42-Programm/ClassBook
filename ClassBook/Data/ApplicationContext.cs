@@ -1,11 +1,21 @@
 ﻿using System;
+
 namespace ClassBook.Data
 {
-	public class ApplicationContext
+	public class ApplicationContext : DbContext
 	{
-		public ApplicationContext()
-		{
-		}
-	}
+		public DbSet<Student> Students { get; set; }
+
+        public DbSet<Teacher> Teachers { get; set; }
+
+        public DbSet<Grade> Grades { get; set; }
+
+        public DbSet<Absence> Absences { get; set; }
+
+
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+            : base(options)
+        { }
+    }
 }
 

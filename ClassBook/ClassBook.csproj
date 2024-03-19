@@ -15,15 +15,24 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.14" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Data\" />
     <None Remove="Data\Entities\" />
+    <None Remove="Services\" />
+    <None Remove="Services\Interfaces\" />
+    <None Remove="Repository\" />
+    <None Remove="Views\Grade\" />
+    <None Remove="Views\Students\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Data\Entities\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Interfaces\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Views\Grade\" />
+    <Folder Include="Views\Students\" />
   </ItemGroup>
 </Project>
