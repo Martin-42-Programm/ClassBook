@@ -58,14 +58,14 @@ namespace ClassBook.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeacherId")
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("TeacherId");
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("Grades");
                 });
@@ -91,6 +91,21 @@ namespace ClassBook.Migrations
                     b.HasKey("NumberInClass");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("ClassBook.Data.Entities.Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("ClassBook.Data.Entities.Teacher", b =>
@@ -143,15 +158,15 @@ namespace ClassBook.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClassBook.Data.Entities.Teacher", "Teacher")
+                    b.HasOne("ClassBook.Data.Entities.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("TeacherId")
+                        .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Student");
 
-                    b.Navigation("Teacher");
+                    b.Navigation("Subject");
                 });
 #pragma warning restore 612, 618
         }

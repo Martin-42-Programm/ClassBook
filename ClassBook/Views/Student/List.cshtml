@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Student>
+<h1>Classes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Class</th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <th>@student.Name</th>
+                    <th>@student.Surname</th>
+                    <th>@student.Class</th>
+                   
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+

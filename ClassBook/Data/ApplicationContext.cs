@@ -12,6 +12,8 @@ namespace ClassBook.Data
 
         public DbSet<Absence> Absences { get; set; }
 
+        public DbSet<Subject> Subjects { get; set; }
+
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

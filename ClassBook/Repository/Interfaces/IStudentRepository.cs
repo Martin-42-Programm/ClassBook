@@ -1,9 +1,8 @@
 ﻿using System;
-namespace ClassBook.Services.Interfaces
+namespace ClassBook.Repository.Interfaces
 {
-	public interface IStudentService
+	public interface IStudentRepository
 	{
-
 		IEnumerable<Student> GetAll();
 
 		Student GetById(int id);

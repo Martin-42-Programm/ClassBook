@@ -15,22 +15,8 @@ namespace ClassBook.Data.Entities
 		public string Surname { get; set; }
 
 		[Required]
-		public string Class
-		{
-			get
-			{
-				return Class;
-			}
-			set
-			{
-				var number = int.Parse(value.Substring(0, 2));
-
-				if (number > 0 && number < 13)
-					Class = value;
-				else
-					throw new InvalidDataException("Invalid class!");
-			}
-		}
+		public string Class { get; set; }
+		
 
 
 

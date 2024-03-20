@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model IEnumerable<GradeViewModel>
+
+<h1>Grades of:  @Model.FirstOrDefault().Name  @Model.FirstOrDefault().Surname</h1>
+
+<table class="table">
+    @foreach (var subject in @Model)
+        {
+    <thead>
+        <tr>
+            <th>
+                @subject.Subject:
+                @foreach (var note in @subject.GradesInCertainSubject)
+                {
+                    @note.Note}
+
+            </th>
+
+         </tr>  
+     </thead>
+
+    
+    }
+</table>
+
+

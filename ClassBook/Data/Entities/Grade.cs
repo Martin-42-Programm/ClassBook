@@ -10,28 +10,14 @@ namespace ClassBook.Data.Entities
 		public int Id { get; set; }
 
 		[Required]
-		public double Note
-		{
-			get
-			{
-				return Note;
-			}
-
-			set
-			{
-				if (value >= 2 && value <= 6)
-					Note = value ;
-				else
-					throw new InvalidDataException("Not a valid grade!");
-			}
-		}
+		public double Note { get; set; }
 
 		
-		[ForeignKey("Teacher")]
-		public int TeacherId { get; set; }
+		[ForeignKey("Subject")]
+		public int SubjectId { get; set; }
 
 
-		public Teacher Teacher { get; set; }
+		public Subject Subject { get; set; }
 
 
         [ForeignKey("Student")]
@@ -41,20 +27,31 @@ namespace ClassBook.Data.Entities
         public Student Student { get; set; }
 
 
+        public Grade()
+        {
+        }
 
-
-		public Grade(int note, int teacherId, int studentid)
+        public Grade(double note, Subject subject, Student student)
 		{
 			this.Note = note;
-			this.TeacherId = teacherId;
-			this.StudentId = studentid;
+			this.Subject = subject ;
+			this.SubjectId = subject.Id;
+			this.StudentId = student.NumberInClass;
 		}
 
+        public Grade(double note, Subject subject, int studentId)
+        {
+            this.Note = note;
+            this.Subject = subject;
+            this.SubjectId = subject.Id;
+            this.StudentId = studentId;
+        }
 
 
-        public Grade()
-		{
-		}
-	}
+
+
+
+
+    }
 }
 

@@ -14,6 +14,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseMySQL(connectionString));
 
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+
+builder.Services.AddScoped<IGradeRepository, GradeRepository>();
+builder.Services.AddScoped<IGradeService, GradeService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
