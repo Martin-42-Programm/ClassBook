@@ -24,6 +24,7 @@
     <None Remove="Services\Interfaces\" />
     <None Remove="Repository\" />
     <None Remove="Views\Grade\" />
+    <None Remove="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -32,5 +33,6 @@
     <Folder Include="Services\Interfaces\" />
     <Folder Include="Repository\" />
     <Folder Include="Views\Grade\" />
+    <Folder Include="Views\Teacher\" />
   </ItemGroup>
 </Project>

@@ -3,8 +3,18 @@ namespace ClassBook.Repository
 {
 	public class TeacherRepository
 	{
-		public TeacherRepository()
+		private ApplicationContext context;
+
+
+		public TeacherRepository(ApplicationContext context)
 		{
+			this.context = context;
+		}
+
+		public void Add(Teacher teacher)
+		{
+			context.Teachers.Add(teacher);
+			context.SaveChanges();
 		}
 	}
 }
