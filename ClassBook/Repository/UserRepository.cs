@@ -1,45 +1,34 @@
-﻿using System;
+﻿using ClassBook.Models.User;
 
-namespace ClassBook.Repository
+public class UserRepository : IUserRepository
 {
-	public class UserRepository : IGenericRepository<User>
-	{
-        private ApplicationContext _context;
+    private readonly ApplicationContext dbContext;
 
-        public UserRepository(ApplicationContext dbContext)
-		{
-            _context = dbContext;
-        }
-
-        public bool Add(User item)
-        {
-            try
-            {
-                _context.Add<User>(item);
-                _context.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-           
-        }
-
-        public bool Delete(User item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User Get(int ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+    public UserRepository(ApplicationContext dbContext)
+    {
+        this.dbContext = dbContext;
     }
-}
 
+    public IEnumerable<UserViewModel> GetAll()
+        => dbContext.Users
+            .ToList()
+            .Select(userEntity =>
+            {
+                var userRole = dbContext.UserRoles
+                    .FirstOrDefault(userRoleEntity => userRoleEntity.UserId == userEntity.Id);
+                if (userRole is null)
+                {
+                    return null;
+                }
+
+                var role = dbContext.Roles
+                    .First(roleEntity => roleEntity.Id == userRole.RoleId);
+
+                return new UserViewModel(
+                    userEntity.Id,
+                    userEntity.Email,
+                    userEntity.Name,
+                    role.Name);
+            })
+            .Where(user => user != null);
+}

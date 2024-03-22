@@ -6,6 +6,9 @@ namespace ClassBook.Data.Entities
 	public class Student
 	{
 		[Key]
+		public string Id { get; set; }
+
+		[Required]
 		public int NumberInClass { get; set; }
 
 		[Required]
@@ -27,6 +30,7 @@ namespace ClassBook.Data.Entities
 
 		public Student(int numberInClass, string name, string surname, string Class)
 		{
+			this.Id = Guid.NewGuid().ToString();
 			this.NumberInClass = numberInClass;
 			this.Name = name;
 			this.Surname = surname;

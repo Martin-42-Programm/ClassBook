@@ -10,9 +10,9 @@ namespace ClassBook.Repository.Interfaces
 
         Grade Get(int id);
 
-        ICollection<Grade> GetAllByStudentIdAndSubjectId(int id1, int id2);
+        ICollection<Grade> GetAllByStudentIdAndSubjectId(string id1, int id2);
 
-        IEnumerable<GradeViewModel> GetAll(int id);
+        IEnumerable<GradeViewModel> GetAll(string id);
     }
 }
 

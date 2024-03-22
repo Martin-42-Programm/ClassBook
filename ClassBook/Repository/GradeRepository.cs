@@ -32,7 +32,7 @@ namespace ClassBook.Repository
 			context.SaveChanges();
 		}
 
-        public ICollection<Grade> GetAllByStudentIdAndSubjectId(int studentId, int subjectId)
+        public ICollection<Grade> GetAllByStudentIdAndSubjectId(string studentId, int subjectId)
 		{
 			var entities = context.Grades.Where(
 				grade => grade.StudentId == studentId && grade.SubjectId == subjectId)
@@ -42,11 +42,11 @@ namespace ClassBook.Repository
 
 
 
-        public IEnumerable<GradeViewModel> GetAll(int id)
+        public IEnumerable<GradeViewModel> GetAll(string id)
         {
             var list = new List<GradeViewModel>();
-			id = 1;
-			var student = context.Students.FirstOrDefault(student => student.NumberInClass == id) ??
+			
+			var student = context.Students.FirstOrDefault(student => student.Id == id) ??
 				throw new InvalidDataException("Student is null!");
 			var grades = context.Grades.Where(grade => grade.StudentId == id).ToList();
 			

@@ -3,7 +3,7 @@ namespace ClassBook.Models
 {
 	public class CreateGradeViewModel
 	{
-		public int NumberInClass { get; set; }
+		public Student student { get; set; }
 
 		public string Class { get; set; }
 
@@ -13,9 +13,9 @@ namespace ClassBook.Models
 
 
 
-		public CreateGradeViewModel(int id, string Class, double grade, Subject subject)
+		public CreateGradeViewModel(Student student, string Class, double grade, Subject subject)
 		{
-			this.NumberInClass = id;
+			this.student = student;
 			this.Class = Class;
 			this.Grade = grade;
 			this.Subject = subject;

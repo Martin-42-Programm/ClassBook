@@ -19,19 +19,18 @@ namespace ClassBook.Controllers
 
         public IActionResult Create()
         {
-         
+
 
             return View();
         }
 
-        public IActionResult List(int id)
+        public IActionResult List(int numberInClass, string Class)
         {
-            var gradeView = gradeService.GetAll(id);
+            var gradeView = gradeService.GetAll(numberInClass, Class);
 
             return View(gradeView);
         }
 
-        
     }
 }
 

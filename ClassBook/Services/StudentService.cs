@@ -1,5 +1,6 @@
 ﻿using System;
 using ClassBook.Repository;
+using ClassBook.Repository.Interfaces;
 using ClassBook.Services.Interfaces;
 
 namespace ClassBook.Services
@@ -7,17 +8,17 @@ namespace ClassBook.Services
 	public class StudentService : IStudentService
 	{
 
-		private IStudentRepository Repository;
+		private IStudentRepository studentRepository;
 
 
-		public StudentService(IStudentRepository repository)
+		public StudentService(IStudentRepository studentRepository)
 		{
-			this.Repository = repository;
+			this.studentRepository = studentRepository;
 		}
 
 		public IEnumerable<Student> GetAll()
 		{
-            var studentEntities = Repository.GetAll();
+            var studentEntities = studentRepository.GetAll();
 
            
             return studentEntities;
@@ -25,10 +26,24 @@ namespace ClassBook.Services
 
 		public Student GetById(int id)
 		{
-			var student = Repository.GetById(id);
+			var student = studentRepository.GetById(id);
 
 			return student;
 		}
-	}
+
+        public List<Student> CreateAListOfStudents(string className)
+        {
+            var newListOfStudents = studentRepository
+											.ExtractStudentsFromClass(className);
+            return newListOfStudents;
+        }
+
+        public string GetStudentId(int numberInClass, string Class)
+		{
+			var studentId = studentRepository.GetStudentId(numberInClass, Class);
+
+			return studentId;
+		}
+    }
 }
 

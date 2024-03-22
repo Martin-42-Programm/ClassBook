@@ -4,27 +4,29 @@ namespace ClassBook.Services
 	public class GradeService : IGradeService
 	{
 		private IGradeRepository gradeRepository;
+		private IStudentService studentService;
 
-		public GradeService(IGradeRepository gradeRepository)
+		public GradeService(IGradeRepository gradeRepository, IStudentService studentService)
 		{
 			this.gradeRepository = gradeRepository;
+			this.studentService = studentService;
 		}
 
 		public void Add(CreateGradeViewModel model)
 		{
-			var grade = new Grade(model.Grade, model.Subject, model.NumberInClass);
+			var grade = new Grade(model.Grade, model.Subject, model.student.Id);
 			gradeRepository.Add(grade);
 		}
 
-		public ICollection<Grade> GetAllByStudentIdAndSubjectId(int studentId, int subjectId)
+		public ICollection<Grade> GetAllByStudentIdAndSubjectId(string studentId, int subjectId)
 		{
 			var entities = gradeRepository.GetAllByStudentIdAndSubjectId(studentId, subjectId);
 			return entities;
 		}
 
-        public IEnumerable<GradeViewModel> GetAll(int id)
+        public IEnumerable<GradeViewModel> GetAll(int numberInClass, string Class)
 		{
-			var entities = gradeRepository.GetAll(id);
+			var entities = gradeRepository.GetAll(studentService.GetStudentId(numberInClass, Class));
 			return entities;
 		}
     }

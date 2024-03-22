@@ -1,4 +1,6 @@
 ﻿using ClassBook.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,13 +14,32 @@ string connectionString = builder
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseMySQL(connectionString));
+    options
+    .UseLazyLoadingProxies()
+    .UseMySQL(connectionString));
+
+
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredUniqueChars = 1;
+    options.Password.RequiredLength = 4;
+})
+    .AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 
 builder.Services.AddScoped<IGradeRepository, GradeRepository>();
 builder.Services.AddScoped<IGradeService, GradeService>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -34,6 +55,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+DataSeed.SeedUserRoles(app);
 
 app.UseAuthorization();
 
