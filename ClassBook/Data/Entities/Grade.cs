@@ -14,7 +14,7 @@ namespace ClassBook.Data.Entities
 
 		
 		[ForeignKey("Subject")]
-		public int SubjectId { get; set; }
+		public string SubjectName { get; set; }
 
 
 		public virtual Subject Subject { get; set; }
@@ -31,30 +31,27 @@ namespace ClassBook.Data.Entities
         {
         }
 
+
+
         public Grade(double note, Subject subject, Student student)
 		{
 			this.Note = note;
 			this.Subject = subject ;
-			this.SubjectId = subject.Id;
+			this.SubjectName = subject.Name;
 			this.StudentId = student.Id;
 		}
 
-        public Grade(double note, Subject subject, string studentId)
+        public Grade(double note, Subject subject, string teacherId)
         {
             this.Note = note;
             this.Subject = subject;
-            this.SubjectId = subject.Id;
-            this.StudentId = studentId;
+            this.SubjectName = subject.Name;
+            this.StudentId = teacherId;
         }
 
 
 
-        public Grade(double note, int subjectId, string studentId)
-        {
-            this.Note = note;
-            this.SubjectId = subjectId;
-            this.StudentId = studentId;
-        }
+        
 
         public override bool Equals(object? other)
             => Equals((Grade)other);
@@ -63,7 +60,7 @@ namespace ClassBook.Data.Entities
             => other != null &&
                 Note == other.Note &&
                 StudentId == other.StudentId &&
-                SubjectId == other.SubjectId; 
+                SubjectName == other.SubjectName; 
 
 
 

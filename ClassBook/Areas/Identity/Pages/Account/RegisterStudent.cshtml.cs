@@ -11,12 +11,12 @@ using ClassBook.Data.Entities;
 
 namespace ClassBook.Areas.Identity.Pages.Account
 {
-    public class RegisterModel : PageModel
+    public class RegisterStudentModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
 
-        public RegisterModel(
+        public RegisterStudentModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager)
         {
@@ -75,7 +75,7 @@ namespace ClassBook.Areas.Identity.Pages.Account
                 {
                     try
                     {
-                        await _userManager.AddToRoleAsync(user, UserRoles.Admin.ToString());
+                        await _userManager.AddToRoleAsync(user, UserRoles.Student.ToString());
                     }
                     catch (Exception)
                     {

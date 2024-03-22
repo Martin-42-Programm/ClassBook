@@ -10,6 +10,9 @@ namespace ClassBook.Repository.Interfaces
         List<Student> ExtractStudentsFromClass(string className);
 
         string GetStudentId(int numberInClass, string Class);
+
+        IEnumerable<Student> GetStudentsWithClass(string Class);
+        
     }
 }
 

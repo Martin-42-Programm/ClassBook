@@ -3,8 +3,9 @@
 *@
 @{
 }
-@model IEnumerable<Student>
-<h1><a asp-controller="Class" asp-action="List">Classes</a></h1>
+@model List<Class>
+
+<h1>Classes</h1>
 
     <table class="table">
         <thead>
@@ -17,14 +18,10 @@
         </thead>
 
         <tbody>
-            @foreach (var student in Model)
+            @foreach (var Class in Model)
             {
                 <tr>
-                    <th>@student.Name</th>
-                    <th>@student.Surname</th>
-                    <th>@student.Class</th>
-                   
-                    
+                    <th><a type="submit" asp-area="" asp-controller="Student" asp-action="ListByClass" asp-route-Class="@Class.Id">@Class.Id</a></th>
                 </tr>
             }
         </tbody>

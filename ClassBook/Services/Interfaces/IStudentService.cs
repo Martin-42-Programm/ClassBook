@@ -11,6 +11,8 @@ namespace ClassBook.Services.Interfaces
         List<Student> CreateAListOfStudents(string className);
 
 		string GetStudentId(int numberInClass, string Class);
+
+		IEnumerable<Student> GetStudentsWithClass(string Class);
     }
 }
 

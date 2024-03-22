@@ -24,19 +24,19 @@ namespace ClassBook.Controllers
             return View(user);
         }
 
-        /*public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> IndexAsync()
         {
             var user = await userService.GetAllAsync();
 
             return View(user);
-        }*/
+        }
 
 
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        public IActionResult Admin()
+        {
+            return View();
+        }
     }
 }
 

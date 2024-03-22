@@ -32,10 +32,10 @@ namespace ClassBook.Repository
 			context.SaveChanges();
 		}
 
-        public ICollection<Grade> GetAllByStudentIdAndSubjectId(string studentId, int subjectId)
+        public ICollection<Grade> GetAllByStudentIdAndSubjectId(string studentId, string subjectName)
 		{
 			var entities = context.Grades.Where(
-				grade => grade.StudentId == studentId && grade.SubjectId == subjectId)
+				grade => grade.StudentId == studentId && grade.SubjectName == subjectName)
 				.ToList();
 			return entities;
 		}
@@ -56,7 +56,7 @@ namespace ClassBook.Repository
 				list.Add(new GradeViewModel(
 					student,
 					subject.Name.ToString(),
-					grades.Where(special => special.Id == subject.Id).ToList()
+					grades.Where(special => special.SubjectName == subject.Name).ToList()
 
 					)) ;
 
@@ -64,6 +64,8 @@ namespace ClassBook.Repository
 
 			return list;
         }
+
+        
     }
 }
 

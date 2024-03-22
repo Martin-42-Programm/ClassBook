@@ -12,8 +12,13 @@ namespace ClassBook.Repository
 			this.context = context;
 		}
 
+        public List<Class> List()
+		{
+			var list = context.Classes.OrderBy(name => name.Id).ToList();
+			return list;
+		}
 
-		
-	}
+
+    }
 }
 

@@ -12,6 +12,8 @@ namespace ClassBook.Data
 
         public DbSet<Subject> Subjects { get; set; }
 
+        public DbSet<Class> Classes { get; set; }
+
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

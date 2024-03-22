@@ -22,6 +22,13 @@ namespace ClassBook.Controllers
             var students = studentService.GetAll();
             return View(students);
         }
+
+        public IActionResult ListByClass(string Class)
+        {
+            var listByClass = studentService.GetStudentsWithClass(Class);
+
+            return View(listByClass);
+        }
     }
 }
 

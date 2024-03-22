@@ -44,6 +44,13 @@ namespace ClassBook.Services
 
 			return studentId;
 		}
+
+		public IEnumerable<Student> GetStudentsWithClass(string Class)
+		{
+			var extractedStudents = studentRepository.GetStudentsWithClass(Class);
+
+			return extractedStudents;
+		}
     }
 }
 

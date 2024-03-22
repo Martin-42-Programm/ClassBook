@@ -8,14 +8,16 @@ namespace ClassBook.Data.Entities
 		[Key]
 		public string Id { get; set; }
 
-		[Required]
-		public List<Student> Students { get; set; }
+		
+		public Class()
+		{
 
+		}
 
-		public Class(string className, List<Student> students)
+		public Class(string className)
 		{
 			this.Id = className;
-			this.Students = students;
+			
 		}
 	}
 }

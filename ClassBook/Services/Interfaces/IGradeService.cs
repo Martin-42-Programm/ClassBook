@@ -9,9 +9,11 @@ namespace ClassBook.Services.Interfaces
 
         //Grade Get(int id);
 
-        ICollection<Grade> GetAllByStudentIdAndSubjectId(string id1, int id2);
+        ICollection<Grade> GetAllByStudentIdAndSubjectId(string id1, string id2);
 
         IEnumerable<GradeViewModel> GetAll(int numberInClass, string Class);
+
+        void Delete(int gradeId);
     }
 }
 

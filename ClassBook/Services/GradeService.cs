@@ -18,7 +18,7 @@ namespace ClassBook.Services
 			gradeRepository.Add(grade);
 		}
 
-		public ICollection<Grade> GetAllByStudentIdAndSubjectId(string studentId, int subjectId)
+		public ICollection<Grade> GetAllByStudentIdAndSubjectId(string studentId, string subjectId)
 		{
 			var entities = gradeRepository.GetAllByStudentIdAndSubjectId(studentId, subjectId);
 			return entities;
@@ -28,6 +28,11 @@ namespace ClassBook.Services
 		{
 			var entities = gradeRepository.GetAll(studentService.GetStudentId(numberInClass, Class));
 			return entities;
+		}
+
+		public void Delete(int gradeId)
+		{
+			gradeRepository.Delete(gradeId);
 		}
     }
 }

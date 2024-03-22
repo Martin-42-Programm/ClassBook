@@ -12,6 +12,12 @@ namespace ClassBook.Services
 			this.classRepository = classRepository;
 		}
 
+
+		public List<Class> List()
+		{
+			var list = classRepository.List();
+			return list;
+		}
 		
 	}
 }

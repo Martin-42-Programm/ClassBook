@@ -1,5 +1,6 @@
 ﻿using System;
 using ClassBook.Data;
+using ClassBook.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClassBook.Repository
@@ -28,7 +29,7 @@ namespace ClassBook.Repository
         public List<Student> ExtractStudentsFromClass(string className)
         {
             var extractedStudents = Context.Students
-                                            .Where(student => student.Class == className)
+                                            .Where(student => student.ClassId == className)
                                             .ToList();
             return extractedStudents;
         }
@@ -37,11 +38,19 @@ namespace ClassBook.Repository
 		{
 			var student = Context.Students.FirstOrDefault(
 						student => student.NumberInClass == numberInClass &&
-									student.Class == Class);
+									student.ClassId == Class);
 			
 			return student.Id;
 
 		}
+
+        public IEnumerable<Student> GetStudentsWithClass(string Class)
+        {
+			var extractedStudents = Context.Students.Where(student =>
+									student.ClassId == Class).ToList();
+
+            return extractedStudents;
+        }
 
     }
 }

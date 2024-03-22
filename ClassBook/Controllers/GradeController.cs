@@ -31,6 +31,13 @@ namespace ClassBook.Controllers
             return View(gradeView);
         }
 
+        public IActionResult Delete(int gradeId)
+        {
+            gradeService.Delete(gradeId);
+
+            return View(nameof(StudentController.List));
+        }
+
     }
 }
 

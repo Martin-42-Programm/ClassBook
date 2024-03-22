@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassBook.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240321233305_Add_New")]
-    partial class Add_New
+    [Migration("20240322172527_Add_Class")]
+    partial class Add_Class
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,16 @@ namespace ClassBook.Migrations
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("ClassBook.Data.Entities.Class", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Classes");
+                });
 
             modelBuilder.Entity("ClassBook.Data.Entities.Grade", b =>
                 {
@@ -38,14 +48,15 @@ namespace ClassBook.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
+                    b.Property<string>("SubjectName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("SubjectName");
 
                     b.ToTable("Grades");
                 });
@@ -55,9 +66,9 @@ namespace ClassBook.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Class")
+                    b.Property<string>("ClassId")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -72,36 +83,33 @@ namespace ClassBook.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClassId");
+
                     b.ToTable("Students");
                 });
 
             modelBuilder.Entity("ClassBook.Data.Entities.Subject", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Name");
 
                     b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("ClassBook.Data.Entities.Teacher", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
+                    b.Property<string>("SubjectName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -109,7 +117,7 @@ namespace ClassBook.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("SubjectName");
 
                     b.ToTable("Teachers");
                 });
@@ -320,7 +328,7 @@ namespace ClassBook.Migrations
 
                     b.HasOne("ClassBook.Data.Entities.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("SubjectName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -329,11 +337,22 @@ namespace ClassBook.Migrations
                     b.Navigation("Subject");
                 });
 
+            modelBuilder.Entity("ClassBook.Data.Entities.Student", b =>
+                {
+                    b.HasOne("ClassBook.Data.Entities.Class", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+                });
+
             modelBuilder.Entity("ClassBook.Data.Entities.Teacher", b =>
                 {
                     b.HasOne("ClassBook.Data.Entities.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("SubjectName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

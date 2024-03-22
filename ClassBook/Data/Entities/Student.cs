@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ClassBook.Data.Entities
 {
@@ -18,9 +19,12 @@ namespace ClassBook.Data.Entities
 		public string Surname { get; set; }
 
 		[Required]
-		public string Class { get; set; }
-		
+		[ForeignKey("Class")]
+		public string ClassId { get; set; }
 
+		public virtual Class Class { get; set; }
+
+		
 
 
 
@@ -34,7 +38,7 @@ namespace ClassBook.Data.Entities
 			this.NumberInClass = numberInClass;
 			this.Name = name;
 			this.Surname = surname;
-			this.Class = Class;
+			this.ClassId = Class;
 		}
 	}
 }

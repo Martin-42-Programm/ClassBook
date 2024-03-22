@@ -7,7 +7,7 @@ namespace ClassBook.Data.Entities
 	public class Teacher
 	{
 		[Key]
-		public int Id { get; set; }
+		public string Id { get; set; }
 
 		[Required]
 		public string Name { get; set; }
@@ -17,7 +17,7 @@ namespace ClassBook.Data.Entities
 
         [Required]
 		[ForeignKey("Subject")]
-		public int SubjectId { get; set; }
+		public string SubjectName { get; set; }
 
 		public virtual Subject Subject { get; set; }
 
@@ -29,16 +29,16 @@ namespace ClassBook.Data.Entities
 		{
 			this.Name = name;
 			this.Surname = surname;
-			this.SubjectId = subject.Id;
+			this.SubjectName = subject.Name;
 		}
 
-        public Teacher(int id, string name, string surname, Subject subject)
+        public Teacher(string id, string name, string surname, Subject subject)
         {
 
 			this.Id = id;
 			this.Name = name;
             this.Surname = surname;
-            this.SubjectId = subject.Id;
+            this.SubjectName = subject.Name;
         }
     }
 }
