@@ -30,7 +30,6 @@ namespace SchoolDiary.Controllers
             }
             return BadRequest(ModelState);
         }
-        [HttpGet(nameof(GetStudentMarks))]
         public IActionResult GetStudentMarks(int studentId, int subjectId, string firstDate, string lastDate)
         {
             if (!(studentId > 0 && subjectId > 0 && firstDate != null && lastDate != null))
@@ -41,7 +40,7 @@ namespace SchoolDiary.Controllers
             if (ModelState.IsValid)
             {
                 
-                var studentMarks = markService.GetConcreteStudentMarksBySubjectId(studentId, subjectId, firstDateObject, lastDateObject);
+                var studentMarks = _markService.GetConcreteStudentMarksBySubjectId(studentId, subjectId, firstDateObject, lastDateObject);
                 if (studentMarks != null)
                 {
                     return Ok(studentMarks);
@@ -54,7 +53,7 @@ namespace SchoolDiary.Controllers
         [HttpGet(nameof(GetAllMarks))]
         public IActionResult GetAllMarks()
         {
-            var marks = markService.GetAllMarks();
+            var marks = _markService.GetAllMarks();
             if (marks != null)
             {
                 return Ok(marks);
@@ -67,7 +66,7 @@ namespace SchoolDiary.Controllers
         {
             if (ModelState.IsValid)
             {
-                var changedMark = markService.ChangeMark(model);
+                var changedMark = _markService.ChangeMark(model);
                 if (changedMark != null)
                 {
                     return Ok();
