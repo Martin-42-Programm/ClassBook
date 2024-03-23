@@ -9,11 +9,13 @@ namespace ClassBook.Services
 	{
 
 		private IStudentRepository studentRepository;
+        private IClassService classService;
 
 
-		public StudentService(IStudentRepository studentRepository)
+        public StudentService(IStudentRepository studentRepository, IClassService classService)
 		{
 			this.studentRepository = studentRepository;
+			this.classService = classService;
 		}
 
 		public IEnumerable<Student> GetAll()
@@ -51,6 +53,16 @@ namespace ClassBook.Services
 
 			return extractedStudents;
 		}
+
+
+        public void Add(CreateStudentViewModel model)
+        {
+            var Class = classService.GetClassByName(model.Class);
+
+
+            var student = new Student(model.Id, model.NumberInClass, model.Name, model.Surname, Class);
+            studentRepository.Add(student);
+        }
     }
 }
 

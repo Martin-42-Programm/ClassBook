@@ -5,6 +5,9 @@ namespace ClassBook.Repository.Interfaces
 	{
 
 		void Add(Teacher teacher);
-	}
+
+		IEnumerable<Teacher> GetTeachersWithSubject(string subject);
+
+    }
 }
 

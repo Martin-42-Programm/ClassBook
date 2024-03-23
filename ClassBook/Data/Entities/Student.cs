@@ -32,13 +32,13 @@ namespace ClassBook.Data.Entities
 		{
 		}
 
-		public Student(int numberInClass, string name, string surname, string Class)
+		public Student(string id, int numberInClass, string name, string surname, Class Class)
 		{
-			this.Id = Guid.NewGuid().ToString();
+			this.Id = id;
 			this.NumberInClass = numberInClass;
 			this.Name = name;
 			this.Surname = surname;
-			this.ClassId = Class;
+			this.ClassId = Class.Id;
 		}
 	}
 }

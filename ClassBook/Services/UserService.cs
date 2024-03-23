@@ -28,7 +28,7 @@ namespace ClassBook.Services
             {
                 var usersInRoleEntities = await userManager.GetUsersInRoleAsync(role.ToString());
                 var usersInRole = usersInRoleEntities
-                    .Select(user => new UserViewModel(user.Id, user.Email, user.Name, role.ToString()));
+                    .Select(user => new UserViewModel(user.Id, user.Email, user.UserName, role.ToString()));
 
                 users.AddRange(usersInRole);
             }

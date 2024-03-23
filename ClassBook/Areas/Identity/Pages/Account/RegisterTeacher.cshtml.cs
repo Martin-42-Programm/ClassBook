@@ -15,13 +15,16 @@ namespace ClassBook.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly ITeacherService _teacherService;
 
         public RegisterTeacherModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            ITeacherService teacherService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _teacherService = teacherService;
         }
 
         [BindProperty]
@@ -43,6 +46,22 @@ namespace ClassBook.Areas.Identity.Pages.Account
                 MinimumLength = 2)]
             [Display(Name = "Name")]
             public string Name { get; set; }
+
+            [Required]
+            [StringLength(
+                100,
+                ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+                MinimumLength = 2)]
+            [Display(Name = "Surname")]
+            public string Surname { get; set; }
+
+            [Required]
+            [StringLength(
+                100,
+                ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+                MinimumLength = 2)]
+            [Display(Name = "Subject")]
+            public string Subject { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
@@ -73,8 +92,13 @@ namespace ClassBook.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    
+
                     try
                     {
+                        var newTeacher = new CreateTeacherViewModel(user.Id, Input.Name, Input.Surname, Input.Subject);
+                        _teacherService.Add(newTeacher);
+
                         await _userManager.AddToRoleAsync(user, UserRoles.Teacher.ToString());
                     }
                     catch (Exception)
@@ -102,12 +126,15 @@ namespace ClassBook.Areas.Identity.Pages.Account
         }
 
         private User CreateUser()
-            => new User()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Email = Input.Email,
-                UserName = Input.Email,
-                Name = Input.Name
-            };
+        {
+            var newGuid = Guid.NewGuid().ToString();
+
+            var newUser = new User(
+                    newGuid,
+                    Input.Email,
+                    Input.Email);
+            return newUser;
+
+        }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ClassBook.Data.Enums;
 using ClassBook.Data.Entities;
+using ClassBook.Models.Student;
 
 namespace ClassBook.Areas.Identity.Pages.Account
 {
@@ -15,13 +16,16 @@ namespace ClassBook.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly IStudentService _studentService;
 
         public RegisterStudentModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            IStudentService studentService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _studentService = studentService;
         }
 
         [BindProperty]
@@ -43,6 +47,30 @@ namespace ClassBook.Areas.Identity.Pages.Account
                 MinimumLength = 2)]
             [Display(Name = "Name")]
             public string Name { get; set; }
+
+            [Required]
+            [StringLength(
+                100,
+                ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+                MinimumLength = 2)]
+            [Display(Name = "Surname")]
+            public string Surname { get; set; }
+
+            [Required]
+            [Range(
+                1, 30,
+                ErrorMessage = "Number in class must be an integer number between {0} and {1}")]
+            [Display(Name = "NumberInClass")]
+            public int NumberInClass { get; set; }
+
+            [Required]
+            [StringLength(
+                3,
+                ErrorMessage = "The {0} must be at least {2} and at max {1} characters long. It should contain grade and parallelClass without spaces!",
+                MinimumLength = 2)]
+            [RegularExpression(@"^[1234567890abcdefgh]+$", ErrorMessage = "The string must only contain '1234567890abcdefgh' and no spaces.")]
+            [Display(Name = "Class")]
+            public string Class { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
@@ -75,6 +103,13 @@ namespace ClassBook.Areas.Identity.Pages.Account
                 {
                     try
                     {
+                        var newStudent = new CreateStudentViewModel(
+                            user.Id,
+                            Input.Name,
+                            Input.NumberInClass,
+                            Input.Surname,
+                            Input.Class);
+                        _studentService.Add(newStudent);
                         await _userManager.AddToRoleAsync(user, UserRoles.Student.ToString());
                     }
                     catch (Exception)
@@ -102,12 +137,14 @@ namespace ClassBook.Areas.Identity.Pages.Account
         }
 
         private User CreateUser()
-            => new User()
+          
             {
-                Id = Guid.NewGuid().ToString(),
-                Email = Input.Email,
-                UserName = Input.Email,
-                Name = Input.Name
-            };
+            var newUser = new User(
+            Guid.NewGuid().ToString(),
+            Input.Email,
+            Input.Name);
+
+                return newUser;
+            }
     }
 }

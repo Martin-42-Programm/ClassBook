@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ClassBook.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,7 +28,19 @@ namespace ClassBook.Controllers
             return View(listClasses);
         }
 
-        
+        public IActionResult Delete(Class Class)
+        {
+            classService.Delete(Class);
+
+            return View(nameof(List));
+        }
+
+        public IActionResult Create(Class Class)
+        {
+            classService.Add(Class);
+
+            return View(nameof(List));
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 ﻿@page
-@model RegisterModel
+@model RegisterStudentModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -21,6 +21,21 @@
                 <input asp-for="Input.Name" class="form-control" autocomplete="name" aria-required="true" placeholder="name" />
                 <label asp-for="Input.Name"></label>
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Surname" class="form-control" autocomplete="name" aria-required="true" placeholder="surname" />
+                <label asp-for="Input.Surname"></label>
+                <span asp-validation-for="Input.Surname" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.NumberInClass" class="form-control" autocomplete="number" aria-required="true" placeholder="0" />
+                <label asp-for="Input.NumberInClass"></label>
+                <span asp-validation-for="Input.NumberInClass" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Class" class="form-control" autocomplete="name" aria-required="true" placeholder="1a" />
+                <label asp-for="Input.Class"></label>
+                <span asp-validation-for="Input.Class" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />

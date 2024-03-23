@@ -15,7 +15,7 @@ namespace ClassBook.Models
 
 
 
-		public GradeViewModel(Student student, string subject, ICollection<Grade> grades)
+		public GradeViewModel(Data.Entities.Student student, string subject, ICollection<Grade> grades)
 		{
 			this.NumberInClass = student.NumberInClass;
 			this.Name = student.Name;

@@ -15,6 +15,7 @@ namespace ClassBook.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        
 
         public RegisterModel(
             UserManager<User> userManager,
@@ -102,12 +103,15 @@ namespace ClassBook.Areas.Identity.Pages.Account
         }
 
         private User CreateUser()
-            => new User()
+            
             {
-                Id = Guid.NewGuid().ToString(),
-                Email = Input.Email,
-                UserName = Input.Email,
-                Name = Input.Name
-            };
+            var newUser = new User(
+            Guid.NewGuid().ToString(),
+            Input.Email,
+            Input.Email);
+
+            return newUser;
+                
+            }
     }
 }

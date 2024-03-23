@@ -12,6 +12,8 @@ namespace ClassBook.Repository.Interfaces
         string GetStudentId(int numberInClass, string Class);
 
         IEnumerable<Student> GetStudentsWithClass(string Class);
+
+        void Add(Student student);
         
     }
 }

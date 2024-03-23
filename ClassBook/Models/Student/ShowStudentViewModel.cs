@@ -21,7 +21,7 @@ namespace ClassBook.Models
 		{
 		}
 
-        public ShowStudentViewModel(int numberInClass, string name, string surname, Class Class)
+        public ShowStudentViewModel(int numberInClass, string name, string surname, Data.Entities.Class Class)
         {
             this.NumberInClass = numberInClass;
             this.Name = name;

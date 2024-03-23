@@ -1,5 +1,6 @@
 ﻿using System;
 using ClassBook.Data;
+using ClassBook.Data.Entities;
 using ClassBook.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -50,6 +51,12 @@ namespace ClassBook.Repository
 									student.ClassId == Class).ToList();
 
             return extractedStudents;
+        }
+
+		public void Add(Student student)
+		{
+            Context.Students.Add(student);
+            Context.SaveChanges();
         }
 
     }

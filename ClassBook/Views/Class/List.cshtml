@@ -5,23 +5,20 @@
 }
 @model List<Class>
 
+
 <h1>Classes</h1>
 
     <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Class</th>
-                
-            </tr>
-        </thead>
+       
 
         <tbody>
             @foreach (var Class in Model)
             {
                 <tr>
                     <th><a type="submit" asp-area="" asp-controller="Student" asp-action="ListByClass" asp-route-Class="@Class.Id">@Class.Id</a></th>
+
+
+                    <th><button asp-controller="Class" asp-action="Delete" asp-route-@Class="@Model.FirstOrDefault()">Delete</button></th>
                 </tr>
             }
         </tbody>

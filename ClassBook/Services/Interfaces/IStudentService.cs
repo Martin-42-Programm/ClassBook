@@ -13,6 +13,8 @@ namespace ClassBook.Services.Interfaces
 		string GetStudentId(int numberInClass, string Class);
 
 		IEnumerable<Student> GetStudentsWithClass(string Class);
+
+		void Add(CreateStudentViewModel student);
     }
 }
 

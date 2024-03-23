@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model IEnumerable<Teacher>
+
+<h1><a asp-controller="Subject" asp-action="List" asp-route-subject="@Model.FirstOrDefault().SubjectName">Subject:</a> @Model.FirstOrDefault().SubjectName</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+          
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var teacher in Model)
+        {
+            <tr>
+                <th>@teacher.Name</th>
+                <th>@teacher.Surname</th>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Subject>
+
+<h1>Subjects</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var subject in Model)
+        {
+            <tr>
+                <th><a asp-area="" asp-controller="Teacher" asp-action="List" asp-route-subject="@subject.Name">@subject.Name</a></th> 
+            </tr>
+        }
+    </tbody>
+</table>
+

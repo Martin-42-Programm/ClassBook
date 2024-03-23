@@ -21,9 +21,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Views\Class\" />
+    <None Remove="Views\Subject\" />
+    <None Remove="Models\Class\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Class\" />
+    <Folder Include="Views\Subject\" />
+    <Folder Include="Models\Class\" />
   </ItemGroup>
 </Project>
