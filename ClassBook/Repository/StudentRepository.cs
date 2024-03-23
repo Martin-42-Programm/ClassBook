@@ -21,9 +21,9 @@ namespace ClassBook.Repository
 			return Context.Students.ToList();
 		}
 
-		public Student GetById(int id)
+		public Student GetById(string id)
 		{
-			var student = Context.Students.FirstOrDefault(student => student.NumberInClass == id);
+			var student = Context.Students.FirstOrDefault(student => student.Id == id);
 			return student;
 		}
 

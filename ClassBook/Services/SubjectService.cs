@@ -1,5 +1,6 @@
 ﻿using System;
 using ClassBook.Repository;
+using ClassBook.Repository.Interfaces;
 
 namespace ClassBook.Services
 {
@@ -18,14 +19,32 @@ namespace ClassBook.Services
             return list;
         }
 
-        public void Delete(Subject subject)
+        public void Delete(string subject)
         {
-            subjectRepository.Delete(subject);
+            var newSubject = new Subject(subject);
+            bool doesAlreadyExist = false;
+
+            var compareClass = subjectRepository.GetSubjectById(subject);
+            if (compareClass != null)
+                doesAlreadyExist = true;
+
+            if (doesAlreadyExist)
+                subjectRepository.Delete(newSubject);
         }
 
-        public void Add(Subject subject)
+        public void Add(string subject)
         {
-            subjectRepository.Add(subject);
+
+            var newSubject = new Subject(subject);
+            bool doesAlreadyExist = false;
+
+            var compareSubject = subjectRepository.GetSubjectById(subject);
+            if (compareSubject != null)
+                doesAlreadyExist = true;
+
+            if (!doesAlreadyExist)
+                subjectRepository.Add(newSubject);
+            
         }
 
         public Subject GetSubjectById(string subject)

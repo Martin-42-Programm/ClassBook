@@ -5,9 +5,9 @@ namespace ClassBook.Services.Interfaces
 	{
         List<Subject> List();
 
-        void Delete(Subject subject);
+        void Delete(string subject);
 
-        void Add(Subject subject);
+        void Add(string subject);
 
         Subject GetSubjectById(string subject);
     }

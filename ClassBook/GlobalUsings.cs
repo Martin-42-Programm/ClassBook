@@ -13,7 +13,7 @@ global using ClassBook.Models;
 
 global using ClassBook.Models.User;
 global using ClassBook.Models.Student;
-
+global using ClassBook.Models.Class;
 
 global using ClassBook.Data;
 global using ClassBook.Data.Enums;

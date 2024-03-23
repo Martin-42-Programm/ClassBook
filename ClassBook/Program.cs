@@ -16,7 +16,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options
     .UseLazyLoadingProxies()
-    .UseMySQL(connectionString));
+    .UseMySQL(connectionString)
+    .EnableSensitiveDataLogging(true));
 
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>

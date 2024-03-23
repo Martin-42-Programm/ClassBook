@@ -6,25 +6,33 @@
 
 
 @model IEnumerable<Teacher>
+@if (@Model.Count() != 0)
+{
 
-<h1><a asp-controller="Subject" asp-action="List" asp-route-subject="@Model.FirstOrDefault().SubjectName">Subject:</a> @Model.FirstOrDefault().SubjectName</h1>
+    <h1><a asp-controller="Subject" asp-action="List" asp-route-subject="@Model.FirstOrDefault().SubjectName">Subject:</a> @Model.FirstOrDefault().SubjectName</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Surname</th>
-          
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var teacher in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <th>@teacher.Name</th>
-                <th>@teacher.Surname</th>
+                <th>Name</th>
+                <th>Surname</th>
+
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+            @foreach (var teacher in Model)
+                {
+                <tr>
+                    <th>@teacher.Name</th>
+                    <th>@teacher.Surname</th>
+                  
+                </tr>
+                }
+        </tbody>
+    </table>
+    }
+    else
+{
+        <h1 class="text-danger">No teachers for this subject!</h1>
+}

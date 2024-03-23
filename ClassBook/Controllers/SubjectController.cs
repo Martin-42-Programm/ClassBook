@@ -35,18 +35,27 @@ namespace ClassBook.Controllers
             return View(listSubjects);
         }
 
-        public IActionResult Delete(Subject subject)
+        public IActionResult Delete(string subject)
         {
             subjectService.Delete(subject);
 
             return View(nameof(List));
         }
 
-        public IActionResult Add(Subject subject)
+        public IActionResult Create()
         {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Create(string subject)
+        {
+            if (subject == null)
+                return View(nameof(Create));
             subjectService.Add(subject);
 
-            return View(nameof(List));
+            return RedirectToAction(nameof(List));
         }
     }
 }

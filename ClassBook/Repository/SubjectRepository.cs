@@ -33,9 +33,7 @@ namespace ClassBook.Repository
             var subjectEntity = context.Subjects.FirstOrDefault(
                 entity => entity.Name == subject);
 
-            if (subjectEntity == null)
-                throw new InvalidDataException("The subject doesn't exist!");
-
+         
             return subjectEntity;
         }
 

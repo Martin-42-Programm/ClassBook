@@ -18,9 +18,10 @@
                     <th><a type="submit" asp-area="" asp-controller="Student" asp-action="ListByClass" asp-route-Class="@Class.Id">@Class.Id</a></th>
 
 
-                    <th><button asp-controller="Class" asp-action="Delete" asp-route-@Class="@Model.FirstOrDefault()">Delete</button></th>
+                    <th><button><a asp-controller="Class" asp-action="Delete" asp-route-Class="@Model.FirstOrDefault().Id">Delete</a></button></th>
                 </tr>
             }
         </tbody>
     </table>
 
+    <button><a asp-controller="Class" asp-action="Create">Create new class</a></button>

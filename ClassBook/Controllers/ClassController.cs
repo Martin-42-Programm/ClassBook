@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ClassBook.Data.Entities;
 using ClassBook.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,18 +29,27 @@ namespace ClassBook.Controllers
             return View(listClasses);
         }
 
-        public IActionResult Delete(Class Class)
+        public IActionResult Delete(string Class)
         {
             classService.Delete(Class);
 
             return View(nameof(List));
         }
 
-        public IActionResult Create(Class Class)
+        public IActionResult Create()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(string Class)
+        {
+
+            if (Class == null)
+                return View(nameof(Create));
             classService.Add(Class);
 
-            return View(nameof(List));
+            return RedirectToAction(nameof(List));
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ClassBook.Services
             return studentEntities;
         }
 
-		public Student GetById(int id)
+		public Student GetById(string id)
 		{
 			var student = studentRepository.GetById(id);
 

@@ -6,7 +6,7 @@ namespace ClassBook.Services.Interfaces
 
 		IEnumerable<Student> GetAll();
 
-		Student GetById(int id);
+		Student GetById(string id);
 
         List<Student> CreateAListOfStudents(string className);
 

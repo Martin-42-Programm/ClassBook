@@ -5,9 +5,9 @@ namespace ClassBook.Services.Interfaces
 	{
        List<Class> List();
 
-        void Delete(Class Class);
+        void Delete(string Class);
 
-        void Add(Class Class);
+        void Add(string Class);
 
         Class GetClassByName(string className);
     }

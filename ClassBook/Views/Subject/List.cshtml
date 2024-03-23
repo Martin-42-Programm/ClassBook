@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Subject</th>
-            
+
 
         </tr>
     </thead>
@@ -21,9 +21,18 @@
         @foreach (var subject in Model)
         {
             <tr>
-                <th><a asp-area="" asp-controller="Teacher" asp-action="List" asp-route-subject="@subject.Name">@subject.Name</a></th> 
+                <th><a asp-area="" asp-controller="Teacher" asp-action="List" asp-route-subject="@subject.Name">@subject.Name</a></th>
+
+
+                
+
+<th><button><a asp-controller="Subject" asp-action="Delete" asp-route-subject="@Model.FirstOrDefault().Name">Delete</a></button></th>
             </tr>
-        }
-    </tbody>
-</table>
+    }
+
+
+        </tbody>
+    </table>
+
+<button><a asp-controller="Subject" asp-action="Create">Create new subject</a></button>
 

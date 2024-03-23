@@ -104,7 +104,7 @@ namespace ClassBook.Areas.Identity.Pages.Account
 
         private User CreateUser()
             
-            {
+        {
             var newUser = new User(
             Guid.NewGuid().ToString(),
             Input.Email,
@@ -112,6 +112,6 @@ namespace ClassBook.Areas.Identity.Pages.Account
 
             return newUser;
                 
-            }
+        }
     }
 }

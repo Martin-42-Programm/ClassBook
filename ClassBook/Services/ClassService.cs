@@ -17,14 +17,32 @@ namespace ClassBook.Services
 			return list;
 		}
 
-		public void Delete(Class Class)
+		public void Delete(string Class)
 		{
-			classRepository.Delete(Class);
+			var newClass = new Class(Class);
+            bool doesAlreadyExist = false;
+            var compareClass = classRepository.GetClassByName(Class);
+
+            if (compareClass != null)
+                doesAlreadyExist = true;
+
+			if (doesAlreadyExist)
+				classRepository.Delete(newClass);
+			else
+				throw new Exception("Not an existing entity!");
 		}
 
-		public void Add(Class Class)
+		public void Add(string Class)
 		{
-			classRepository.Add(Class);
+			var newClass = new Class(Class);
+			bool doesAlreadyExist = false;
+
+			var compareClass = classRepository.GetClassByName(Class);
+			if (compareClass != null)
+				doesAlreadyExist = true;
+				
+			if (!doesAlreadyExist)
+				classRepository.Add(newClass);
 		}
 
 		public Class GetClassByName(string className)

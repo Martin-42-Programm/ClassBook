@@ -5,25 +5,33 @@
 }
 
 @model IEnumerable<Student>
+@if (@Model.Count() != 0)
+{
 
-<h1><a asp-controller="Class" asp-action="List">Class @Model.FirstOrDefault().ClassId</a></h1>
+    <h1><a asp-controller="Class" asp-action="List">Class @Model.FirstOrDefault().ClassId</a></h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Surname</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var student in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <th><a asp-controller="Grade" asp-action="List" asp-route-numberInClass="@student.NumberInClass" asp-route-Class="@student.ClassId">@student.Name</a></th>
-                <th>@student.Surname</th>
+                <th>Name</th>
+                <th>Surname</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <th><a asp-controller="Grade" asp-action="List" asp-route-numberInClass="@student.NumberInClass" asp-route-Class="@student.ClassId">@student.Name</a></th>
+                    <th>@student.Surname</th>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <h1 class="text-danger">No students in this class!</h1>}
 

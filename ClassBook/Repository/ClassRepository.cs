@@ -20,12 +20,14 @@ namespace ClassBook.Repository
 
 		public void Delete(Class Class)
 		{
+			
 			context.Classes.Remove(Class);
 			context.SaveChanges();
 		}
 
 		public void Add(Class Class)
 		{
+			
 			context.Classes.Add(Class);
 			context.SaveChanges();
 		}
@@ -33,8 +35,7 @@ namespace ClassBook.Repository
         public Class GetClassByName(string className)
         {
             var classEntity = context.Classes.FirstOrDefault(entity => entity.Id == className);
-			if (classEntity == null)
-				throw new InvalidDataException("The class doesn't exist!");
+		
 
             return classEntity;
         }

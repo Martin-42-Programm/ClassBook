@@ -5,7 +5,7 @@ namespace ClassBook.Repository.Interfaces
 	{
 		IEnumerable<Student> GetAll();
 
-		Student GetById(int id);
+		Student GetById(string id);
 
         List<Student> ExtractStudentsFromClass(string className);
 
