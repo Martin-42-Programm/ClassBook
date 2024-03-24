@@ -3,36 +3,58 @@
 *@
 @{
 }
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ITeacherService teacherService
+
+@model Student
+
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Teacher"))
+    {
+
+        var teacherId = UserManager.GetUserId(User);
+        if (teacherId == null)
+            throw new ArgumentNullException("Invalid teacher_Id!");
+        var subject = teacherService.ExtractTeacherSubject(teacherId);
+        var student = @Model;
+
+
 
 <h1><a asp-controller="Class" asp-action="List">Classes</a></h1>
 
-<h3>New Class</h3>
+<h3>New Grade for: @student.Name @student.Surname, @student.ClassId</h3>
 
 
 <form method="post" asp-controller="Grade" asp-action="Create">
     <p>
-        <label>Number</label>
-        <input type="number" min="1" max="30" name="name">
+        <label>NumberInClass</label>
+        <input type="number" min="1" max="30" name="number" value="@Model.NumberInClass">
 
     </p>
 
     <p>
         <label>Class</label>
-        <input type="text" name="name">
+        <input type="text" name="Class" value="@Model.ClassId">
 
     </p>
 
     <p>
         <label>Grade</label>
-        <input type="number" step="any" min="2" max="6" name="name">
+        <input type="number" step="any" min="2" max="6" name="grade">
 
     </p>
 
     <p>
         <label>Subject</label>
-        <input type="text" name="name">
+        <input type="text" name="subject" value="@subject.Name">
 
     </p>
 
-    <button asp-controller="Grade" asp-action="List">Create</button>
+    <button type="submit">Create</button>
 </form>
+    }
+    else
+    {
+        <h1 class="text-danger">You don't have access!</h1>
+    }

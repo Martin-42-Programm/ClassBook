@@ -14,6 +14,8 @@ namespace ClassBook.Services
 
 		public void Add(CreateGradeViewModel model)
 		{
+			if (model == null)
+				throw new Exception("Trying to add a NULL object!");
 			var grade = new Grade(model.Grade, model.Subject, model.student.Id);
 			gradeRepository.Add(grade);
 		}

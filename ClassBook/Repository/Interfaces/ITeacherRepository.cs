@@ -8,6 +8,8 @@ namespace ClassBook.Repository.Interfaces
 
 		IEnumerable<Teacher> GetTeachersWithSubject(string subject);
 
+		Subject ExtractTeacherSubject(string teacherId);
+
     }
 }
 

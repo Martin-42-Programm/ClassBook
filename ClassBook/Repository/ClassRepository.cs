@@ -21,6 +21,7 @@ namespace ClassBook.Repository
 		public void Delete(Class Class)
 		{
 			
+
 			context.Classes.Remove(Class);
 			context.SaveChanges();
 		}

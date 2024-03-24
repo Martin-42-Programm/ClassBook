@@ -26,6 +26,16 @@ namespace ClassBook.Repository
 
             return extractedTeachers;
         }
+
+        public Subject ExtractTeacherSubject(string teacherId)
+		{
+			var teacherEntity = context.Teachers.FirstOrDefault(
+				entity => entity.Id == teacherId);
+
+            if (teacherEntity == null)
+                throw new Exception("Invalid teacher_Id!");
+            return teacherEntity.Subject;
+		}
     }
 }
 

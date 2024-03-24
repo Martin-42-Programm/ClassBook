@@ -11,21 +11,22 @@
 
 <table class="table">
     @foreach (var subject in @Model)
-        {
-    <thead>
-        <tr>
-            <th>
-                @subject.Subject:
-                @foreach (var note in @subject.GradesInCertainSubject)
-                {
-                    @note.Note}
+    {
+        <thead>
+            <tr>
+                <th>
+                    @subject.Subject:
+                    @foreach (var note in @subject.GradesInCertainSubject)
+                    {
+                        @note.Note<space>,  </space>}
+                   
 
-            </th>
+                </th>
 
-         </tr>  
-     </thead>
+            </tr>
+        </thead>
 
-    
+
     }
 </table>
 

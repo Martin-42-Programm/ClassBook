@@ -11,6 +11,11 @@ namespace ClassBook.Models.User
 
         public string Role { get; set; }
 
+        public UserViewModel()
+        {
+
+        }
+
         public UserViewModel(string id, string email, string name, string role)
         {
             Id = id;

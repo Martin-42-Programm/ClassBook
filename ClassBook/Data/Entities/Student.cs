@@ -40,6 +40,14 @@ namespace ClassBook.Data.Entities
 			this.Surname = surname;
 			this.ClassId = Class.Id;
 		}
-	}
+        public Student(string id, int numberInClass, string name, string surname, string Class)
+        {
+            this.Id = id;
+            this.NumberInClass = numberInClass;
+            this.Name = name;
+            this.Surname = surname;
+            this.ClassId = Class;
+        }
+    }
 }
 

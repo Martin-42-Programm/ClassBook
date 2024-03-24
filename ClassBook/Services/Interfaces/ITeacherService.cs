@@ -7,6 +7,8 @@ namespace ClassBook.Services.Interfaces
 
 		IEnumerable<Teacher> GetТeachersWithSubject(string subject);
 
+		Subject ExtractTeacherSubject(string teacherId);
+
     }
 }
 

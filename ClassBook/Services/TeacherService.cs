@@ -5,8 +5,8 @@ namespace ClassBook.Services
 {
 	public class TeacherService : ITeacherService
 	{
-		private ITeacherRepository teacherRepository;
-        private ISubjectService subjectService;
+		private readonly ITeacherRepository teacherRepository;
+        private readonly ISubjectService subjectService;
 
         public TeacherService(ITeacherRepository teacherRepository, ISubjectService subjectService)
 		{
@@ -16,10 +16,11 @@ namespace ClassBook.Services
 
 		public void Add(CreateTeacherViewModel model)
 		{
-			var subject = subjectService.GetSubjectById(model.Subject);
+			var name = model.Subject;
+			var subjectEntity = subjectService.GetSubjectById(name);
 
 
-			var teacher = new Teacher(model.Id, model.Name, model.Surname, subject);
+			var teacher = new Teacher(model.Id, model.Name, model.Surname, subjectEntity);
 			teacherRepository.Add(teacher);
 		}
 
@@ -29,6 +30,16 @@ namespace ClassBook.Services
 			var extractedTeachers = teacherRepository.GetTeachersWithSubject(subject);
 
             return extractedTeachers;
+        }
+
+		public Subject ExtractTeacherSubject(string teacherId)
+		{
+			var subject = teacherRepository.ExtractTeacherSubject(teacherId);
+
+			if (subject == null)
+                throw new Exception("Invalid teacher_Id!");
+
+			return subject;
         }
     }
 }

@@ -7,6 +7,8 @@ namespace ClassBook.Repository.Interfaces
 	{
 
         IEnumerable<UserViewModel> GetAll();
+
+       
     }
 }
 

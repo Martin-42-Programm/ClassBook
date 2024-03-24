@@ -27,7 +27,8 @@ namespace ClassBook.Tests.Repository
 		public void GivenGrade_WhenAddGrade_AddGrade()
 		{
 			var subject = new Subject("24");
-            var student = new Student(13, "Martin", "Ivanov", "11d");
+			var Class = new Class("11s");
+            var student = new Student("df", 13, "Martin", "Ivanov", Class);
             var grade = new Grade(4.8, subject, student);
 
 			gradeRepository.Add(grade);
@@ -38,6 +39,18 @@ namespace ClassBook.Tests.Repository
 			Assert.AreEqual(grade, grade, "Different Grade than expected!");
 
         }
+
+		[Test]
+		public void GivenNull_WhenAddGrade_ReturnError()
+		{
+			gradeRepository.Add(null);
+
+			var createdGrade = applicationContext.Grades.LastOrDefault();
+
+			Assert.Null(createdGrade, "Null object was assigned!");
+		}
+
+
 
 
 		private ApplicationContext SetUpApplicationContext()

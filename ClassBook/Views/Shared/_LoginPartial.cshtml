@@ -37,18 +37,16 @@
     }
     else if (SignInManager.IsSignedIn(User) && User.IsInRole("Student"))
     {
-            var student = studentService.GetById(UserManager.GetUserId(User));
-            var studentNumberInClass = student.NumberInClass;
-            var studentClass = student.ClassId;
+        var student = studentService.GetById(UserManager.GetUserId(User));
+        var studentNumberInClass = student.NumberInClass;
+        var studentClass = student.ClassId;
 
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Grade" asp-action="List" asp-route-numberInClass="@studentNumberInClass" asp-route-Class="@studentClass">Grades</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Privacy">Privacy</a>
-                </li>
+                
             </ul>
         </div>
 
@@ -63,6 +61,31 @@
         </li>
     }
 
+    else if (SignInManager.IsSignedIn(User) && User.IsInRole("Teacher"))
+    {
+       // var student = studentService.GetById(UserManager.GetUserId(User));
+      //  var studentNumberInClass = student.NumberInClass;
+      //  var studentClass = student.ClassId;
+
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Class" asp-action="List" >Classes</a>
+                </li>
+                
+            </ul>
+        </div>
+
+
+        <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+            </form>
+        </li>
+    }
 
     else
     {
