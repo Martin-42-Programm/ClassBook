@@ -18,6 +18,7 @@ namespace ClassBook.Repository
 
         public void Delete(Subject subject)
         {
+            context.ChangeTracker.Clear();
             context.Subjects.Remove(subject);
             context.SaveChanges();
         }

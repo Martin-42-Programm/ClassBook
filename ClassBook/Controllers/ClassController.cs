@@ -32,8 +32,10 @@ namespace ClassBook.Controllers
         public IActionResult Delete(string Class)
         {
             classService.Delete(Class);
+            //var listClasses = classService.List();
 
-            return View(nameof(List));
+
+            return RedirectToAction(nameof(List));
         }
 
         public IActionResult Create()

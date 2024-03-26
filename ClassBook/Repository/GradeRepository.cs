@@ -28,7 +28,8 @@ namespace ClassBook.Repository
 		public void Delete(int id)
 		{
 			var entity = Get(id);
-			context.Grades.Remove(entity);
+            context.ChangeTracker.Clear();
+            context.Grades.Remove(entity);
 			context.SaveChanges();
 		}
 

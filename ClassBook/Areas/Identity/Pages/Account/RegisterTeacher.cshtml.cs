@@ -110,7 +110,7 @@ namespace ClassBook.Areas.Identity.Pages.Account
                         return Page();
                     }
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
 
                     return LocalRedirect(returnUrl);
                 }

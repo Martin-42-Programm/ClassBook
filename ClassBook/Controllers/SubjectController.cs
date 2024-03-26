@@ -39,7 +39,7 @@ namespace ClassBook.Controllers
         {
             subjectService.Delete(subject);
 
-            return View(nameof(List));
+            return RedirectToAction(nameof(List));
         }
 
         public IActionResult Create()

@@ -40,9 +40,26 @@ namespace ClassBook.Services
 			var compareClass = classRepository.GetClassByName(Class);
 			if (compareClass != null)
 				doesAlreadyExist = true;
-				
+
+			var length = newClass.Id.Length;
+			char lastChar = 'Z';
+			int numberOfClass = 0;
+			if (length == 3)
+			{
+				lastChar = newClass.Id[2];
+				numberOfClass = int.Parse(newClass.Id.Substring(0, 2));
+			}
+			else if (length == 2)
+			{
+				lastChar = newClass.Id[1];
+				numberOfClass = int.Parse(newClass.Id.Substring(0, 1));
+			}
+
+
 			if (!doesAlreadyExist)
-				classRepository.Add(newClass);
+				if (numberOfClass >= 1 && numberOfClass <= 12 && lastChar >= 'a' && lastChar <= 'z')
+					classRepository.Add(newClass);
+				
 		}
 
 		public Class GetClassByName(string className)

@@ -68,7 +68,7 @@ namespace ClassBook.Areas.Identity.Pages.Account
                 3,
                 ErrorMessage = "The {0} must be at least {2} and at max {1} characters long. It should contain grade and parallelClass without spaces!",
                 MinimumLength = 2)]
-            [RegularExpression(@"^[1234567890abcdefgh]+$", ErrorMessage = "The string must only contain '1234567890abcdefgh' and no spaces.")]
+            [RegularExpression(@"^[1234567890abcdefghigklmnopqrstuvwxyz]+$", ErrorMessage = "The string must only contain '1234567890abcdefgh' and no spaces.")]
             [Display(Name = "Class")]
             public string Class { get; set; }
 
@@ -121,7 +121,7 @@ namespace ClassBook.Areas.Identity.Pages.Account
                         return Page();
                     }
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
 
                     return LocalRedirect(returnUrl);
                 }
@@ -142,7 +142,7 @@ namespace ClassBook.Areas.Identity.Pages.Account
             var newUser = new User(
             Guid.NewGuid().ToString(),
             Input.Email,
-            Input.Name);
+            Input.Email);
 
                 return newUser;
             }

@@ -20,11 +20,12 @@ namespace ClassBook.Repository
 
 		public void Delete(Class Class)
 		{
-			
-
+			context.ChangeTracker.Clear();
 			context.Classes.Remove(Class);
 			context.SaveChanges();
-		}
+           
+
+        }
 
 		public void Add(Class Class)
 		{

@@ -17,7 +17,23 @@ namespace ClassBook.Data
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
-        { }
+        {
+            
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Cascade;
+               
+            }
+        }
+
+
     }
 }
 

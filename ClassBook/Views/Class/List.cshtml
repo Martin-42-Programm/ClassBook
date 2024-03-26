@@ -3,25 +3,37 @@
 *@
 @{
 }
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @model List<Class>
 
 
 <h1>Classes</h1>
 
-    <table class="table">
-       
-
-        <tbody>
-            @foreach (var Class in Model)
-            {
-                <tr>
-                    <th><a type="submit" asp-area="" asp-controller="Student" asp-action="ListByClass" asp-route-Class="@Class.Id">@Class.Id</a></th>
+<table class="table">
 
 
-                    <th><button><a asp-controller="Class" asp-action="Delete" asp-route-Class="@Model.FirstOrDefault().Id">Delete</a></button></th>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <tbody>
+        @foreach (var Class in Model)
+        {
+            <tr>
+                <th><a type="submit" asp-area="" asp-controller="Student" asp-action="ListByClass" asp-route-Class="@Class.Id">@Class.Id</a></th>
 
-    <button><a asp-controller="Class" asp-action="Create">Create new class</a></button>
+                
+                    
+                    <th><button id="deleteButton"><a asp-controller="Class" asp-action="Delete" asp-route-Class="@Model.FirstOrDefault().Id">Delete</a></button></th>}
+            </tr>
+        }
+    </tbody>
+</table>
+<script>document.getElementById('deleteButton').addEventListener('click', function (event) {
+        var confirmDeletion = confirm('Are you sure you want to delete this? All related data will be deleted!!!');
+        if (!confirmDeletion) {
+
+            event.preventDefault();
+        } else { }
+    });</script>
+
+
+<button><a asp-controller="Class" asp-action="Create">Create new class</a></button>

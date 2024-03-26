@@ -24,15 +24,22 @@
                 <th><a asp-area="" asp-controller="Teacher" asp-action="List" asp-route-subject="@subject.Name">@subject.Name</a></th>
 
 
-                
 
-<th><button><a asp-controller="Subject" asp-action="Delete" asp-route-subject="@Model.FirstOrDefault().Name">Delete</a></button></th>
+
+                <th><button id="deleteButton"><a asp-controller="Subject" asp-action="Delete" asp-route-subject="@Model.FirstOrDefault().Name">Delete</a></button></th>
             </tr>
-    }
+        }
 
 
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
 <button><a asp-controller="Subject" asp-action="Create">Create new subject</a></button>
 
+<script>document.getElementById('deleteButton').addEventListener('click', function(event) {
+        var confirmDeletion = confirm('Are you sure you want to delete this? All related data will be deleted!!!');
+        if (!confirmDeletion) {
+
+            event.preventDefault();
+        } else {}
+});</script>

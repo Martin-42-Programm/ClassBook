@@ -3,6 +3,7 @@ using System;
 using ClassBook.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassBook.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240326220328_Add_Delete")]
+    partial class Add_Delete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +31,6 @@ namespace ClassBook.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
-                    
 
                     b.ToTable("Classes");
                 });
@@ -57,8 +59,6 @@ namespace ClassBook.Migrations
                     b.HasIndex("SubjectName");
 
                     b.ToTable("Grades");
-
-                   
                 });
 
             modelBuilder.Entity("ClassBook.Data.Entities.Student", b =>
