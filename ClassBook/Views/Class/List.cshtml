@@ -16,15 +16,15 @@
 
     <tbody>
         @foreach (var Class in Model)
-        {
+            {
             <tr>
                 <th><a type="submit" asp-area="" asp-controller="Student" asp-action="ListByClass" asp-route-Class="@Class.Id">@Class.Id</a></th>
 
                 
                     
-                    <th><button id="deleteButton"><a asp-controller="Class" asp-action="Delete" asp-route-Class="@Model.FirstOrDefault().Id">Delete</a></button></th>}
+                    <th><button id="deleteButton"><a asp-controller="Class" asp-action="Delete" asp-route-Class="@Model.FirstOrDefault().Id">Delete</a></button></th>
             </tr>
-        }
+            }
     </tbody>
 </table>
 <script>document.getElementById('deleteButton').addEventListener('click', function (event) {
