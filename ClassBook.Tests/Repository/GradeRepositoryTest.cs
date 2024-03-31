@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
+
 namespace ClassBook.Tests.Repository
 {
 	public class GradeRepositoryTest
@@ -40,20 +42,94 @@ namespace ClassBook.Tests.Repository
 
         }
 
-		[Test]
-		public void GivenNull_WhenAddGrade_ReturnError()
-		{
-			gradeRepository.Add(null);
+        [Test]
+        public void Get_WhenCalledWithId_ReturnsGrade()
+        {
+			var student = new Student("123", 12, "Martin", "Ivanov", "11d");
+			var subject = new Subject("Bio");
+			var grade = new Grade(2,subject, student);
+            applicationContext.Grades.Add(grade);
+            applicationContext.SaveChanges();
 
-			var createdGrade = applicationContext.Grades.LastOrDefault();
+            var result = gradeRepository.Get(1);
 
-			Assert.Null(createdGrade, "Null object was assigned!");
-		}
+            Assert.AreEqual(grade, result);
+        }
+
+        [Test]
+        public void Add_WhenCalledWithGrade_AddsGradeToDatabase()
+        {
+            var student = new Student("123", 12, "Martin", "Ivanov", "11d");
+            var subject = new Subject("Bio");
+            var grade = new Grade(2, subject, student);
+
+            gradeRepository.Add(grade);
+
+            var addedGrade = applicationContext.Grades.Find(grade.Id);
+            Assert.AreEqual(grade, addedGrade);
+        }
+
+        [Test]
+        public void Delete_WhenCalledWithId_DeletesGradeFromDatabase()
+        {
+            var student = new Student("123", 12, "Martin", "Ivanov", "11d");
+            var subject = new Subject("Bio");
+            var grade = new Grade(2, subject, student);
+            applicationContext.Grades.Add(grade);
+            applicationContext.SaveChanges();
+
+            gradeRepository.Delete(1);
+
+            var deletedGrade = applicationContext.Grades.Find(1);
+            Assert.IsNull(deletedGrade);
+        }
+
+        [Test]
+        public void GetAllByStudentIdAndSubjectId_WhenCalledWithIds_ReturnsGrades()
+        {
+            var studentId = "student1";
+            var subjectName = "Math";
+            var student = new Student(studentId, 12, "Martin", "Ivanov", "11d");
+            var subject = new Subject(subjectName);
+            
+            var grades = new List<Grade>
+    {
+        new Grade (2, subject, student),
+        new Grade (3, subject, student)
+    };
+            applicationContext.Grades.AddRange(grades);
+            applicationContext.SaveChanges();
+
+            var result = gradeRepository.GetAllByStudentIdAndSubjectId(studentId, subjectName);
+
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(subjectName, result.First().SubjectName);
+        }
+
+        [Test]
+        public void GetAll_WhenCalledWithId_ReturnsGradeViewModels()
+        {
+            var studentId = "student1";
+            var student = new Student(studentId, 12, "Martin", "Ivanov", "11d");
+            var subject = new Subject("Bio");
+            var grade = new Grade(2, subject, student);
+            applicationContext.Students.Add(student);
+            applicationContext.Subjects.Add(subject);
+            applicationContext.Grades.Add(grade);
+            applicationContext.SaveChanges();
+
+            var result = gradeRepository.GetAll(studentId);
+
+            Assert.AreEqual(1, result.Count());
+            var viewModel = result.First();
+            Assert.AreEqual(subject.Name, viewModel.Subject);
+            Assert.AreEqual(student.NumberInClass, viewModel.NumberInClass);
+            Assert.AreEqual(1, viewModel.GradesInCertainSubject.Count);
+        }
 
 
 
-
-		private ApplicationContext SetUpApplicationContext()
+        private ApplicationContext SetUpApplicationContext()
 		{
 			var options = new DbContextOptionsBuilder<ApplicationContext>()
 				.UseInMemoryDatabase("UnitTestsDb");

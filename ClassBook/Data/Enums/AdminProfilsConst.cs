@@ -17,7 +17,7 @@ namespace ClassBook.Data.Enums
         {
             Id = Guid.NewGuid().ToString();
             Email = "admin@gmail.com";
-            Name = "Admin5432";
+            Name = "Marti";
             Password = "Mart1";
         }
 

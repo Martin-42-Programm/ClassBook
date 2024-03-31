@@ -70,7 +70,7 @@ namespace ClassBook.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                var result = await _userManager.CreateAsync(user, AdminProfilsConst.Password);
+                var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
@@ -87,7 +87,7 @@ namespace ClassBook.Areas.Identity.Pages.Account
                         return Page();
                     }
 
-                 //   await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
 
                     return LocalRedirect(returnUrl);
                 }
@@ -106,9 +106,9 @@ namespace ClassBook.Areas.Identity.Pages.Account
             
         {
             var newUser = new User(
-                AdminProfilsConst.Id,
-                AdminProfilsConst.Email,
-                AdminProfilsConst.Name);
+                Guid.NewGuid().ToString(),
+               Input.Email,
+                Input.Name);
 
             return newUser;
                 

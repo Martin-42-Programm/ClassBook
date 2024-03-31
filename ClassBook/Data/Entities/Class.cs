@@ -19,6 +19,14 @@ namespace ClassBook.Data.Entities
 			this.Id = className;
 			
 		}
-	}
+
+        public override bool Equals(object? other)
+            => Equals((Class)other);
+
+		public bool Equals(Class other)
+			=> other != null &&
+				Id == other.Id ;
+                
+    }
 }
 

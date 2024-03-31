@@ -78,17 +78,17 @@ namespace ClassBook.Tests.Services
             // Arrange
             var numberInClass = 1;
             var className = "ClassA";
-			var subject = new Subject("Bio");
-			var Class = new Class(className);
-			
-			var student = new Student("sas", numberInClass, "Martin", "Ivanov", Class);
-			var grades = new List<Grade> {
-				new Grade(2, subject, student),
-				new Grade(3, subject, student)
+            var subject = new Subject("Bio");
+            var Class = new Class(className);
 
-			};
+            var student = new Student("sas", numberInClass, "Martin", "Ivanov", Class);
+            var grades = new List<Grade> {
+                new Grade(2, subject, student),
+                new Grade(3, subject, student)
+
+            };
             var expectedGrades = new List<GradeViewModel> {
-				new GradeViewModel(student, subject.Name, grades),
+                new GradeViewModel(student, subject.Name, grades),
 
                 new GradeViewModel(student, "Physics", grades)
 
@@ -99,16 +99,14 @@ namespace ClassBook.Tests.Services
             //var gradeService = new GradeService(gradeRepositoryMock.Object, /* other dependencies if any */);
 
             // Act
-		
+
             var result = gradeService.GetAll(numberInClass, className);
-			gradeRepositoryMock.Verify(
-				mock => mock.GetAll(It.Is<string>(a => a == "sas")), Times.Once);
+            gradeRepositoryMock.Verify(
+                mock => mock.GetAll(It.Is<string>(a => a == "sas")), Times.Once);
 
             // Assert
             //CollectionAssert.AreEquivalent(expectedGrades, result);
         }
-
-
 
 
 
